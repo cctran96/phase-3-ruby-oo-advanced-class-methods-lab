@@ -6,12 +6,10 @@ class Song
     @@all
   end
 
-  def initialize
-    @@all << self
-  end
-
   def self.create
-    Song.new()
+    song = Song.new()
+    all << song
+    song
   end
 
   def save
@@ -39,7 +37,7 @@ class Song
   end
 
   def self.alphabetical
-    @@all = @@all.sort{|a,b| a.name < b.name ? -1 : 1}.uniq
+    @@all = @@all.sort{|a,b| a.name <=> b.name}
   end
   
   def self.new_from_filename(song_and_artist)
